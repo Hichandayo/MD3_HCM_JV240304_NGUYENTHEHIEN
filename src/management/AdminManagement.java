@@ -18,8 +18,7 @@ public static final String ANSI_RED = "\u001B[31m";
                 System.out.println(ANSI_BLUE + "╠════════════════════════════════════════════╣" + ANSI_RESET);
                 System.out.println(ANSI_YELLOW + "║ 1. Quản lí danh mục                        ║" + ANSI_RESET);
                 System.out.println(ANSI_YELLOW + "║ 2. Quản lí sản phẩm                        ║" + ANSI_RESET);
-                System.out.println(ANSI_YELLOW + "║ 3. Quản lí người dùng                      ║" + ANSI_RESET);
-                System.out.println(ANSI_RED + "║ 4. Đăng Xuất                               ║" + ANSI_RESET);
+                System.out.println(ANSI_RED + "║ 3. Đăng Xuất                               ║" + ANSI_RESET);
                 System.out.println(ANSI_BLUE + "Nhập lựa chọn ⭣ ⭣ ⭣     " + ANSI_RESET);
                 System.out.println(ANSI_BLUE + "╚════════════════════════════════════════════╝" + ANSI_RESET);
                 byte choice = InputMethods.getByte();
@@ -29,6 +28,7 @@ public static final String ANSI_RED = "\u001B[31m";
                         CategoryManagement.menuCategory();
                         break;
                     case 2:
+                        //menu sản phẩm
                         ProductManagement.menuProduct();
                         break;
                     case 3:

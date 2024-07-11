@@ -15,6 +15,7 @@ public class CategoryManagement {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_RED = "\u001B[31m";
 
+
         static void menuCategory() {
         while (true) {
                 System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
@@ -46,10 +47,13 @@ public class CategoryManagement {
                     default:
                         System.err.println("Lựa chọn ko chính xác , vui lòng nhập lại");
                 }
+                if (choice == 5){
+                    break;
+                }
 
             }
         }
-        //********* sửa  sản phẩm ************
+        //********* sửa  Danh Mục ************
         private static void editCategory() {
             System.out.println("Nhập mã danh mục  cần sửa ");
             int catId = InputMethods.getInteger();
@@ -62,7 +66,7 @@ public class CategoryManagement {
                 System.out.println("Cập nhật thành công");
             }
         }
-//********* thêm mới sản phẩm ************
+//********* thêm mới Danh Mục ************
 
         private static void addNewCategory() {
             System.out.println("Nhập số lượng danh mục cần thêm mới");
@@ -77,7 +81,7 @@ public class CategoryManagement {
             System.out.println("Đã thêm mới thành công " + n + " danh mục !");
         }
 
-//********* hiển thị sản phẩm ************
+//********* hiển thị Danh Mục ************
 
         private static void showCategoryList() {
             // lấy ra danh sách
@@ -91,7 +95,7 @@ public class CategoryManagement {
                 }
             }
         }
-        //********* Xóa sản phẩm ************
+        //********* Xóa Danh Mục ************
         private static void deleteCategory() {
             System.out.println("Nhập mã danh mục cần xóa ");
             int catId = InputMethods.getInteger();
@@ -102,4 +106,6 @@ public class CategoryManagement {
                 System.out.println("đã xóa sản phẩm thành công!!!");
             }
         }
-    }
+
+
+}

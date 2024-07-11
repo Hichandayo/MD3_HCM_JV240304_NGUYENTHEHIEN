@@ -1,9 +1,6 @@
 package util.validations;
 public class ProductValidation {
-    public static boolean isValidProductID(String productID) {
-        String regex = "^P[0-9]{4}$";
-        return productID.matches(regex);
-    }
+
     public static boolean isValidProductName(String productName) {
         String regex = "^(?=.*\\S).{1,50}$";
         return productName.matches(regex);

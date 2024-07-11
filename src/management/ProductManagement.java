@@ -21,6 +21,7 @@ public class ProductManagement {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_CYAN = "\u001B[36m";
 
+
     static void menuProduct() {
         while (true) {
             System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
@@ -101,7 +102,7 @@ public class ProductManagement {
             switch (choice) {
                 case 1:
                     System.out.println("Nhập tên sản phẩm mới: ");
-                    String productName = InputMethods.getString("Enter new name: ");
+                    String productName = InputMethods.getString();
                     if (!ProductValidation.isValidProductName(productName)) {
                         System.out.println("Tên sản phẩm không được bỏ trống.");
                         return;
@@ -137,7 +138,7 @@ public class ProductManagement {
                     break;
                 case 5:
                     System.out.println("Nhập mô tả sản phẩm mới: ");
-                    String productDescription = InputMethods.getString("Enter new name: ");
+                    String productDescription = InputMethods.getString();
                     if (!ProductValidation.isValidProductDescription(productDescription)) {
                         System.out.println("Mô tả sản phẩm không được bỏ trống.");
                         return;

@@ -4,6 +4,7 @@ import business.IAuthDesign;
 import entity.RoleName;
 import entity.User;
 import exception.UsernameAndPasswordException;
+//import management.AdminManagement;
 import management.AdminManagement;
 import management.UserManagement;
 import util.IOFile;
@@ -54,9 +55,9 @@ public static final String ANSI_PURPLE = "\u001B[35m";
     private static void login(){
         System.out.println("=================Đăng nhập=================");
         System.out.println("Nhập username/ email :");
-        String username = InputMethods.getString("Enter new name: ");
+        String username = InputMethods.getString();
         System.out.println("Nhập password");
-        String password = InputMethods.getString("Enter new name: ");
+        String password = InputMethods.getString();
         try{
             User userLogin = authDesign.signIn(username,password);
             // lưu thông tin người dùng vào file
@@ -85,7 +86,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
         //Nhập và kiển tra tên đăng nhập
         while (true) {
             System.out.println(ANSI_PURPLE +"Nhập Tên ngươi dùng"+ ANSI_RESET);
-            user.setFullName(InputMethods.getString("Enter new name: "));
+            user.setFullName(InputMethods.getString());
             if (!user.getFullName().isEmpty()) {
                 break;
             } else {
@@ -95,7 +96,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
         //Nhập và kiểm tra email
         while (true) {
             System.out.println(ANSI_PURPLE +"Nhập email đăng nhập"+ ANSI_RESET);
-            user.setEmail(InputMethods.getString("Enter new name: "));
+            user.setEmail(InputMethods.getString());
             if (UserValidation.isValidEmail(user.getEmail())) {
                 break;
             } else {
@@ -105,7 +106,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
         //Nhập và kiểm tra mật khẩu
         while (true) {
             System.out.println(ANSI_PURPLE +"Nhập mật khẩu"+ ANSI_RESET);
-            user.setPassword(InputMethods.getString("Enter new name: "));
+            user.setPassword(InputMethods.getString());
             if (UserValidation.isValidPassword(user.getPassword())) {
                 break;
             } else {
@@ -115,7 +116,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
         //Nhập và kiểm tra số điện thoại
         while (true) {
             System.out.println(ANSI_PURPLE +"Nhập số điện thoại"+ ANSI_RESET);
-            user.setPhone(InputMethods.getString("Enter new name: "));
+            user.setPhone(InputMethods.getString());
             if (UserValidation.isValidPhone(user.getPhone())) {
                 break;
             } else {
@@ -125,7 +126,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
         //Nhập và kiểm tra địa chỉ
         while (true) {
             System.out.println(ANSI_PURPLE +"Nhập Địa Chỉ"+ ANSI_RESET);
-            user.setAddress(InputMethods.getString("Enter new name: "));
+            user.setAddress(InputMethods.getString());
             if (!user.getAddress().isEmpty()) {
                 break;
             } else {
@@ -133,7 +134,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
             }
         }
         System.out.println(ANSI_PURPLE +"Nhập ngày sinh (dd/MM/yyyy)"+ ANSI_RESET);
-        user.setBirthday(LocalDate.parse(InputMethods.getString("Enter new name: "),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        user.setBirthday(LocalDate.parse(InputMethods.getString(),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         authDesign.signUp(user);
         System.out.println("Đăng kí thành công");
         // chuyển hướng đến đăng nhập

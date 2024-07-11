@@ -24,7 +24,7 @@ public final class InputMethods {
     /**
      * getString()  Return a String value from the user.
      */
-    public static String getString(String s) {
+    public static String getString() {
         while (true) {
             String result = getInput();
             if (result.equals("")) {
@@ -39,14 +39,14 @@ public final class InputMethods {
      * getChar()  Return a Character value from the user.
      */
     public static char getChar() {
-        return getString("Enter new name: ").charAt(0);
+        return getString().charAt(0);
     }
 
     /**
      * getBoolean()  Return a Boolean value from the user.
      */
     public static boolean getBoolean() {
-        String result = getString("Enter new name: ");
+        String result = getString();
         return result.equalsIgnoreCase("true");
     }
 
@@ -56,7 +56,7 @@ public final class InputMethods {
     public static byte getByte() {
         while (true) {
             try {
-                return Byte.parseByte(getString("Enter new name: "));
+                return Byte.parseByte(getString());
             } catch (NumberFormatException errException) {
                 System.err.println(ERROR_ALERT);
             }
@@ -69,7 +69,7 @@ public final class InputMethods {
     public static short getShort() {
         while (true) {
             try {
-                return Short.parseShort(getString("Enter new name: "));
+                return Short.parseShort(getString());
             } catch (NumberFormatException errException) {
                 System.err.println(ERROR_ALERT);
             }
@@ -82,7 +82,7 @@ public final class InputMethods {
     public static int getInteger() {
         while (true) {
             try {
-                return Integer.parseInt(getString("Enter new name: "));
+                return Integer.parseInt(getString());
             } catch (NumberFormatException errException) {
                 System.err.println(ERROR_ALERT);
             }
@@ -95,7 +95,7 @@ public final class InputMethods {
     public static long getLong() {
         while (true) {
             try {
-                return Long.parseLong(getString("Enter new name: "));
+                return Long.parseLong(getString());
             } catch (NumberFormatException errException) {
                 System.err.println(ERROR_ALERT);
             }
@@ -108,7 +108,7 @@ public final class InputMethods {
     public static float getFloat() {
         while (true) {
             try {
-                return Float.parseFloat(getString("Enter new name: "));
+                return Float.parseFloat(getString());
             } catch (NumberFormatException errException) {
                 System.err.println(ERROR_ALERT);
             }
@@ -121,7 +121,7 @@ public final class InputMethods {
     public static double getDouble() {
         while (true) {
             try {
-                return Double.parseDouble(getString("Enter new name: "));
+                return Double.parseDouble(getString());
             } catch (NumberFormatException errException) {
                 System.err.println(ERROR_ALERT);
             }

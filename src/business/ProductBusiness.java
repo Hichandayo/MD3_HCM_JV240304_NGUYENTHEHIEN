@@ -1,6 +1,5 @@
 package business;
 import entity.Product;
-import entity.User;
 import util.IOFile;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ public class ProductBusiness implements IProductDesign{
 
     @Override
     public List<Product> findByName(String name) {
-//        return products.stream().filter(pro-> pro.getName().toLowerCase().contains(name.toLowerCase())).toList();
         List<Product> searchList = new ArrayList<>();
         for (Product pro : products){
             if (pro.getName().toLowerCase().contains(name.toLowerCase())){
@@ -24,50 +22,34 @@ public class ProductBusiness implements IProductDesign{
         }
         return searchList;
     }
-
+    //tạo cái mới
     @Override
-    public void create(User user) {
-
-    }
-
-    @Override
-    public User findById(String id) {
-        return null;
-    }
-
-    @Override
-    public void update(User user) {
-
-    }
-
-    @Override
-    public void deleteById(String id) {
-
-    }
-
-    @Override
-    public void create(Product product) {
+    public Boolean create(Product product) {
         products.add(product);
         IOFile.writeToFile(IOFile.PRODUCT_PATH,products);
-    }
+        return false;
 
+    }
+    //Xóa tất cả
     @Override
     public List<Product> findAll() {
         return products;
     }
-
     @Override
-    public void update(Product product) {
+    public Boolean update(Product product) {
         products.set(products.indexOf(findById(product.getId())),product);
         IOFile.writeToFile(IOFile.PRODUCT_PATH,products);
+        return false;
     }
-
+    //Xóa
     @Override
-    public void deleteById(Integer id) {
+    public Boolean deleteById(Integer id) {
         products.remove(findById(id));
         IOFile.writeToFile(IOFile.PRODUCT_PATH,products);
-    }
+        return false;
 
+    }
+    //tìm theo ID
     @Override
     public Product findById(Integer id) {
         for (Product pro : products){

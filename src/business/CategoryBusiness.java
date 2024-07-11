@@ -1,7 +1,6 @@
 package business;
 
 import entity.Category;
-import entity.User;
 import util.IOFile;
 
 import java.util.List;
@@ -12,32 +11,12 @@ public class CategoryBusiness implements ICategoryDesign{
     public CategoryBusiness() {
         categories = IOFile.readFromFile(IOFile.CATEGORY_PATH);
     }
-
-
     @Override
-    public void create(User user) {
-
-    }
-
-    @Override
-    public User findById(String id) {
-        return null;
-    }
-
-    @Override
-    public void update(User user) {
-
-    }
-
-    @Override
-    public void deleteById(String id) {
-
-    }
-
-    @Override
-    public void create(Category category) {
+    public Boolean create(Category category) {
         categories.add(category);
         IOFile.writeToFile(IOFile.CATEGORY_PATH,categories);
+        return false;
+
     }
 
     @Override
@@ -46,15 +25,19 @@ public class CategoryBusiness implements ICategoryDesign{
     }
 
     @Override
-    public void update(Category category) {
+    public Boolean update(Category category) {
         categories.set(categories.indexOf(findById(category.getId())),category);
         IOFile.writeToFile(IOFile.CATEGORY_PATH,categories);
+        return false;
+
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public Boolean deleteById(Integer id) {
         categories.remove(findById(id));
         IOFile.writeToFile(IOFile.CATEGORY_PATH,categories);
+        return false;
+
     }
 
     @Override

@@ -9,34 +9,31 @@ import util.IOFile;
 import java.util.List;
 
 public class AuthBusiness implements IAuthDesign{
-    private static List<User> users ;
+    private static final List<User> users ;
     static {
         users= IOFile.readFromFile(IOFile.USER_PATH);
     }
 
     @Override
-    public void create(User user) {
-    }
-
-    @Override
-    public User findById(String id) {
+    public Boolean create(User user) {
         return null;
     }
+
+
 
     public List<User> findAll() {
         return users;
     }
 
     @Override
-    public void update(User user) {
+    public Boolean update(User user) {
+        return null;
     }
 
-    @Override
-    public void deleteById(String id) {
-    }
 
     @Override
-    public void deleteById(Integer id) {
+    public Boolean deleteById(Integer id) {
+        return null;
     }
 
     @Override
