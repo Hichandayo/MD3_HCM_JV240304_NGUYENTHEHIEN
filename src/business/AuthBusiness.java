@@ -15,8 +15,12 @@ public class AuthBusiness implements IAuthDesign{
     }
 
     @Override
-    public boolean create(User user) {
-        return false;
+    public void create(User user) {
+    }
+
+    @Override
+    public User findById(String id) {
+        return null;
     }
 
     public List<User> findAll() {
@@ -24,13 +28,15 @@ public class AuthBusiness implements IAuthDesign{
     }
 
     @Override
-    public boolean update(User user) {
-        return false;
+    public void update(User user) {
     }
 
     @Override
-    public boolean deleteById(Integer id) {
-        return false;
+    public void deleteById(String id) {
+    }
+
+    @Override
+    public void deleteById(Integer id) {
     }
 
     @Override

@@ -1,5 +1,6 @@
 package business;
 import entity.Product;
+import entity.User;
 import util.IOFile;
 
 import java.util.ArrayList;
@@ -25,10 +26,29 @@ public class ProductBusiness implements IProductDesign{
     }
 
     @Override
-    public boolean create(Product product) {
+    public void create(User user) {
+
+    }
+
+    @Override
+    public User findById(String id) {
+        return null;
+    }
+
+    @Override
+    public void update(User user) {
+
+    }
+
+    @Override
+    public void deleteById(String id) {
+
+    }
+
+    @Override
+    public void create(Product product) {
         products.add(product);
         IOFile.writeToFile(IOFile.PRODUCT_PATH,products);
-        return true;
     }
 
     @Override
@@ -37,17 +57,15 @@ public class ProductBusiness implements IProductDesign{
     }
 
     @Override
-    public boolean update(Product product) {
+    public void update(Product product) {
         products.set(products.indexOf(findById(product.getId())),product);
         IOFile.writeToFile(IOFile.PRODUCT_PATH,products);
-        return true;
     }
 
     @Override
-    public boolean deleteById(Integer id) {
+    public void deleteById(Integer id) {
         products.remove(findById(id));
         IOFile.writeToFile(IOFile.PRODUCT_PATH,products);
-        return true;
     }
 
     @Override

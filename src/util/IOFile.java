@@ -22,7 +22,7 @@ public class IOFile {
         }catch (FileNotFoundException e){
             System.err.println("File không tồn tại");
         }catch (EOFException e){
-            System.err.println("File trống");
+            System.err.println("Chưa Có Tài Khoản User Nào, Hãy Thêm Vào!!");
             User admin = new User(1,"admin","admin@gmail.com", BCrypt.hashpw("admin123",BCrypt.gensalt(5)),null,null,null, RoleName.ADMIN,false);
             List<User> users = new ArrayList<>();
             users.add(admin);

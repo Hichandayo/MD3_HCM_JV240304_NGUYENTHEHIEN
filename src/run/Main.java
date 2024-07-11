@@ -124,7 +124,7 @@ public static final String ANSI_PURPLE = "\u001B[35m";
         }
         //Nhập và kiểm tra địa chỉ
         while (true) {
-            System.out.println(ANSI_PURPLE +"Nhập số điện thoại"+ ANSI_RESET);
+            System.out.println(ANSI_PURPLE +"Nhập Địa Chỉ"+ ANSI_RESET);
             user.setAddress(InputMethods.getString("Enter new name: "));
             if (!user.getAddress().isEmpty()) {
                 break;

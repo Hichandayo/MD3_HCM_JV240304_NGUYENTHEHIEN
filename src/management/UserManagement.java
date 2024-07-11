@@ -16,7 +16,6 @@ public class UserManagement {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
     public static void user(){
         while (true) {
             System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
@@ -36,9 +35,10 @@ public class UserManagement {
                     break;
                 case 0:
                     break;
-                default -> System.out.println("Lựa chọn không hợp lệ");
+                default:
+                    System.out.println("Lựa chọn không hợp lệ");
         }
-    }
+    }}
         //        ******* hiển thị thông tin người dùng
         private   static void userInfo() {
             Optional<User> loggedInUser = UserBusiness.getLoggedInUser();

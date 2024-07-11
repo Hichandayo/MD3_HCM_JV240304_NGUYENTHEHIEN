@@ -1,6 +1,5 @@
 package business;
 
-import business.IGenericDesign;
 import entity.User;
 
 import java.util.HashMap;
@@ -61,7 +60,4 @@ public class UserBusiness implements IGenericDesign {
         return null;
     }
 
-    public List<User> getAllUsers() {
-        return (List<User>) this.users;
-    }
 }
