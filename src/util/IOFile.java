@@ -1,6 +1,8 @@
 package util;
 
+import entity.RoleName;
 import entity.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,6 +23,11 @@ public class IOFile {
             System.err.println("File không tồn tại");
         }catch (EOFException e){
             System.err.println("File trống");
+            User admin = new User(1,"admin","admin@gmail.com", BCrypt.hashpw("admin123",BCrypt.gensalt(5)),null,null,null, RoleName.ADMIN,false);
+            List<User> users = new ArrayList<>();
+            users.add(admin);
+            writeToFile(USER_PATH, users);
+            return (List<T>) users;
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }  finally {

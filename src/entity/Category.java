@@ -48,7 +48,7 @@ public class Category implements IProductManagement, Serializable {
     @Override
     public void inputData() {
         System.out.println("Nhập tên danh mục :");
-        this.name = InputMethods.getString();
+        this.name = InputMethods.getString("Enter new name: ");
     }
 
     @Override

@@ -1,29 +1,33 @@
+package run;
 import business.AuthBusiness;
 import business.IAuthDesign;
 import entity.RoleName;
 import entity.User;
 import exception.UsernameAndPasswordException;
+import management.AdminManagement;
+import management.UserManagement;
 import util.IOFile;
 import util.InputMethods;
 import util.validations.UserValidation;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+public class Main{
 private static final IAuthDesign authDesign = new AuthBusiness();
 public static final String ANSI_RESET = "\u001B[0m";
-public static final String ANSI_RED = "\u001B[31m";
-public static final String ANSI_YELLOW = "\u001B[33m";
-public static final String ANSI_BLUE = "\u001B[34m";
 public static final String ANSI_CYAN = "\u001B[36m";
+public static final String ANSI_PURPLE = "\u001B[35m";
+
     public static void main(String[] args) {
 
         while (true) {
-            System.out.println("----------------------H-Store-------------------");
-            System.out.println("1. Đăng nhập");
-            System.out.println("2. Đăng kí");
-            System.out.println("3. Thoát");
-            System.out.println("----- Nhập lựa chọn -------");
+            System.out.println(ANSI_PURPLE + "╔════════════════════════════╗" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE +"║ Welcome to Hi-chan Shop    ║"+ ANSI_RESET);
+            System.out.println(ANSI_PURPLE + "╠════════════════════════════╣" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE + "║" + ANSI_RESET + ANSI_CYAN + "    1. Đăng nhập " + ANSI_RESET + ANSI_PURPLE + "           ║" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE + "║" + ANSI_RESET + ANSI_CYAN + "    2. Đăng kí" + ANSI_RESET + ANSI_PURPLE + "              ║" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE + "║" + ANSI_RESET + ANSI_CYAN + "    3. Thoát" + ANSI_RESET + ANSI_PURPLE + "                ║" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE + "╚ " + ANSI_RESET + ANSI_CYAN + "  Nhập lựa chọn ⭣ ⭣ ⭣" + ANSI_RESET + ANSI_PURPLE + "     ═╝" + ANSI_RESET);
             byte choice = InputMethods.getByte();
             switch (choice) {
                 case 1:
@@ -46,25 +50,26 @@ public static final String ANSI_CYAN = "\u001B[36m";
             }
         }
     }
+    //******* Đăng Nhập *********
     private static void login(){
         System.out.println("=================Đăng nhập=================");
         System.out.println("Nhập username/ email :");
-        String username = InputMethods.getString();
+        String username = InputMethods.getString("Enter new name: ");
         System.out.println("Nhập password");
-        String password = InputMethods.getString();
+        String password = InputMethods.getString("Enter new name: ");
         try{
             User userLogin = authDesign.signIn(username,password);
-            // luu thoong tin nguowif dungf vao file
+            // lưu thông tin người dùng vào file
             IOFile.writeUserLogin(userLogin);
-            // xet quyen ngui dung
+            // xét quyền người dùng
             if (userLogin.getRoleName().equals(RoleName.ADMIN)){
-                menuAdmin();
+                AdminManagement.admin();
             }else if (userLogin.getRoleName().equals(RoleName.USER)){
                 // kiểm tra tài khoản có bị khóa ko
                 if (userLogin.isBlocked()){
-                    System.err.println("tai khoan cua bna da bi khoa, vui lòng liên hệ 0989376756");
+                    System.err.println("tài khoản của bạn đã bị khóa, vui lòng liên hệ Admin để được hỗ trợ.");
                 }else {
-                    userMenu();
+                    UserManagement.user();
                 }
             }
         }catch (UsernameAndPasswordException e){
@@ -72,13 +77,15 @@ public static final String ANSI_CYAN = "\u001B[36m";
             // hỏi người ta có đăng nhập lại hay ko
         }
     }
+    //******* Đăng Ký *********
+
     private static  void register(){
-        System.out.println("------------------Đăng Ký----------------");
+        System.out.println("************Đăng Ký************");
         User user = new User();
         //Nhập và kiển tra tên đăng nhập
         while (true) {
-            System.out.println("Nhập Tên ngươi dùng");
-            user.setFullName(InputMethods.getString());
+            System.out.println(ANSI_PURPLE +"Nhập Tên ngươi dùng"+ ANSI_RESET);
+            user.setFullName(InputMethods.getString("Enter new name: "));
             if (!user.getFullName().isEmpty()) {
                 break;
             } else {
@@ -87,8 +94,8 @@ public static final String ANSI_CYAN = "\u001B[36m";
         }
         //Nhập và kiểm tra email
         while (true) {
-            System.out.println("Nhập email đăng nhập");
-            user.setEmail(InputMethods.getString());
+            System.out.println(ANSI_PURPLE +"Nhập email đăng nhập"+ ANSI_RESET);
+            user.setEmail(InputMethods.getString("Enter new name: "));
             if (UserValidation.isValidEmail(user.getEmail())) {
                 break;
             } else {
@@ -97,8 +104,8 @@ public static final String ANSI_CYAN = "\u001B[36m";
         }
         //Nhập và kiểm tra mật khẩu
         while (true) {
-            System.out.println("Nhập mật khẩu: ");
-            user.setPassword(InputMethods.getString());
+            System.out.println(ANSI_PURPLE +"Nhập mật khẩu"+ ANSI_RESET);
+            user.setPassword(InputMethods.getString("Enter new name: "));
             if (UserValidation.isValidPassword(user.getPassword())) {
                 break;
             } else {
@@ -107,8 +114,8 @@ public static final String ANSI_CYAN = "\u001B[36m";
         }
         //Nhập và kiểm tra số điện thoại
         while (true) {
-            System.out.println("Nhập số điện thoại: ");
-            user.setPhone(InputMethods.getString());
+            System.out.println(ANSI_PURPLE +"Nhập số điện thoại"+ ANSI_RESET);
+            user.setPhone(InputMethods.getString("Enter new name: "));
             if (UserValidation.isValidPhone(user.getPhone())) {
                 break;
             } else {
@@ -117,59 +124,25 @@ public static final String ANSI_CYAN = "\u001B[36m";
         }
         //Nhập và kiểm tra địa chỉ
         while (true) {
-            System.out.println("Nhập địa chỉ: ");
-            user.setAddress(InputMethods.getString());
+            System.out.println(ANSI_PURPLE +"Nhập số điện thoại"+ ANSI_RESET);
+            user.setAddress(InputMethods.getString("Enter new name: "));
             if (!user.getAddress().isEmpty()) {
                 break;
             } else {
-                System.out.println("Địa chỉ không hợp lệ. Vui lòng nhập lại.");
+                System.err.println("Địa chỉ không hợp lệ. Vui lòng nhập lại.");
             }
         }
-        System.out.println("Nhập ngày sinh (dd/MM/yyyy)");
-        user.setBirthday(LocalDate.parse(InputMethods.getString(),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        System.out.println(ANSI_PURPLE +"Nhập ngày sinh (dd/MM/yyyy)"+ ANSI_RESET);
+        user.setBirthday(LocalDate.parse(InputMethods.getString("Enter new name: "),DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         authDesign.signUp(user);
-
         System.out.println("Đăng kí thành công");
         // chuyển hướng đến đăng nhập
         login();
-    }
+    }}
 
-    private static void menuAdmin(){
-        System.out.println("chào mừng bạn đến trang admin");
-        InputMethods.pressAnyKey();
-    }
-    public static void userMenu() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
-            System.out.println(ANSI_CYAN + "║  xin chào quý khách                         ║ " + ANSI_RESET);
-            System.out.println(ANSI_BLUE + "╠════════════════════════════════════════════╣" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 1. Hiển thị thông tin cá nhân              ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 2. Sửa đổi thông tin                       ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 3. Xem tất cả mặt hàng                     ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 4. Xem mặt hàng theo danh mục              ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 5. Thêm mặt hàng vào giỏ                   ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 6. xem giỏ hàng                            ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 7 Xóa mặt hàng khỏi giỏ                    ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 8. Thanh toán                              ║" + ANSI_RESET);
-            System.out.println(ANSI_RED + "║ 0. Đăng xuất                               ║" + ANSI_RESET);
-            System.out.println(ANSI_BLUE + "╚════════════════════════════════════════════╝" + ANSI_RESET);
-            int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice) {
-//                case 1 -> displayInfo(user);
-//                case 2 -> updateInfo(user);
-//                case 3 -> displayAllProduct();
-//                case 4 -> displayProductByCategory(scanner);
-//                case 5 -> addProductToCart(user);
-//                case 6 -> viewCart(user);
-//                case 7 -> removeProductFromCart();
-//                case 8 -> pay(user);
-//                case 0 -> {
-//                    logout();
-//                    return;
-                }
-//                default -> System.out.println("Lựa chọn không hợp lệ");
-            }
 
-        }
+
+
+
+
 

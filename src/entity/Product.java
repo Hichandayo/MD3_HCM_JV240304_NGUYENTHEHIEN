@@ -92,26 +92,26 @@ public class Product implements IProductManagement, Serializable {
     @Override
     public void inputData() {
         System.out.println("Nhập tên sản phẩm");
-        name = InputMethods.getString();
+        name = InputMethods.getString("Enter new name: ");
         System.out.println("Nhập giá");
         price = InputMethods.getDouble();
-        System.out.println("Nhập số lươg");
+        System.out.println("Nhập số lượng");
         stock = InputMethods.getInteger();
         System.out.println(" Nhập mô tả");
-        descriptions = InputMethods.getString();
+        descriptions = InputMethods.getString("Enter new name: ");
         // chọn danh mục
         System.out.println("Danh sách danh mục");
         for (int i = 1 ;i<= categories.size();i++){
             System.out.printf("|STT : %-3s | Name : %-10s |\n",i,categories.get(i-1).getName());
         }
-        System.out.println("Moi ban chon danh muc cho sp");
+        System.out.println("mời bạn chọn danh mục cho sản phẩm");
         while (true){
             int index = InputMethods.getInteger();
             if (index >=1 && index <= categories.size()){
                 this.categoryId = categories.get(index-1).getId();
                 break;
             }else {
-                System.err.println("Nhap khong chinh xac , vui long nhap lai");
+                System.err.println("nhập không chính xác, vui lòng nhập lại");
             }
         }
     }
@@ -124,7 +124,7 @@ public class Product implements IProductManagement, Serializable {
         ICategoryDesign categoryDesign = new CategoryBusiness();
         Category cat = categoryDesign.findById(categoryId);
         if (cat==null){
-            throw new RuntimeException("id ko tim thay");
+            throw new RuntimeException("không tìm thấy danh mục");
         }
         return cat.getName();
     }

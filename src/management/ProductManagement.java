@@ -1,10 +1,9 @@
-package run;
+package management;
 
 import business.CategoryBusiness;
 import business.ICategoryDesign;
 import business.IProductDesign;
 import business.ProductBusiness;
-import entity.Category;
 import entity.Product;
 import util.InputMethods;
 import util.validations.ProductValidation;
@@ -22,166 +21,50 @@ public class ProductManagement {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_CYAN = "\u001B[36m";
 
-    public static void main(String[] args) {
-        while (true) {
-            System.out.println("------------------Product-Management----------------");
-            System.out.println("1. Quản lí danh mục");
-            System.out.println("2. Quản lí sản phẩm");
-            System.out.println("3. Thoát");
-            System.out.println("Lựa chọn của bạn : ");
-            byte choice = InputMethods.getByte();
-            switch (choice) {
-                case 1:
-                    // menu danh mục
-                    menuCategory();
-                    break;
-                case 2:
-                    menuProduct();
-                    break;
-                case 3:
-                    System.out.println("Tạm biệt");
-                    break;
-                default:
-                    System.err.println("Lựa chọn ko chính xác , vui lòng nhập lại");
-            }
-            if (choice == 3) {
-                break;
-            }
-        }
-    }
-
-    private static void menuCategory() {
-        while (true) {
-            System.out.println("------------------Category-Menu----------------");
-            System.out.println("1. Thêm mơi");
-            System.out.println("2. Hiển thị ");
-            System.out.println("3. Sửa tên");
-            System.out.println("4. Xóa ");
-            System.out.println("5. Quay lại ");
-            System.out.println("6. Thoát ");
-            System.out.println("Lựa chọn của bạn : ");
-            byte choice = InputMethods.getByte();
-            switch (choice) {
-                case 1:
-                    addNewCategory();
-                    break;
-                case 2:
-                    showCategoryList();
-                    break;
-                case 3:
-                    editCategory();
-                    break;
-                case 4:
-                    deleteCategory();
-                    break;
-                case 5:
-                    return;
-                case 6:
-                    break;
-                default:
-                    System.err.println("Lựa chọn ko chính xác , vui lòng nhập lại");
-            }
-            if (choice == 6) {
-                break;
-            }
-        }
-    }
-
-    private static void editCategory() {
-        System.out.println("Nhập mã danh mục  cần sưa ");
-        int catId = InputMethods.getInteger();
-        Category catEdit = categoryBusiness.findById(catId);
-        if (catEdit == null) {
-            System.err.println("id không tồn tại");
-        } else {
-            catEdit.inputData();
-            categoryBusiness.update(catEdit);
-            System.out.println("Cập nhật thành công");
-        }
-    }
-
-    private static void addNewCategory() {
-        System.out.println("Nhập số lượng danh mục cần thêm mới");
-        byte n = InputMethods.getByte();
-        for (int i = 0; i < n; i++) {
-            System.out.println("Nhập thông tin cho danh mục thứ :" + (i + 1));
-            Category newCategory = new Category(); // chứa logic tự tăng
-            newCategory.inputData(); // cho nhập thông tin
-            categoryBusiness.create(newCategory); // luu lại
-        }
-        // thông báo thành công
-        System.out.println("Đã thêm mới thành cong " + n + " dnah mục !");
-    }
-
-
-    private static void showCategoryList() {
-        // lấy ra danh sách
-        List<Category> categories = categoryBusiness.findAll();
-        if (categories.isEmpty()) {
-            System.err.println("Danh sách trống !");
-        } else {
-            System.out.println("-------- Danh sac danh mục --------");
-            for (Category cat : categories) {
-                cat.displayData();
-            }
-        }
-    }
-
-    private static void deleteCategory() {
-        System.out.println("Nhập mã danh mục  cần xóa ");
-        int catId = InputMethods.getInteger();
-        if (categoryBusiness.findById(catId) == null) {
-            System.err.println("sản phẩm không tồn tại");
-        } else {
-            categoryBusiness.deleteById(catId);
-            System.out.println(" đã xóa sản phẩm thành công!!!");
-        }
-    }
-
-    private static void menuProduct() {
+    static void menuProduct() {
         while (true) {
             System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
-            System.out.println(ANSI_CYAN + "║  Quản lý sản phẩm                    ║" + ANSI_RESET);
+            System.out.println(ANSI_CYAN + "║               Quản lý sản phẩm             ║" + ANSI_RESET);
             System.out.println(ANSI_BLUE + "╠════════════════════════════════════════════╣" + ANSI_RESET);
             System.out.println(ANSI_YELLOW + "║ Nhập lựa chọn của bạn:                     ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 1. Thêm sản phẩm mới             ║" + ANSI_RESET);
-            System.out.println(ANSI_YELLOW + "║ 2. Hiển thị danh sách sản phẩm                       ║" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "║ 1. Thêm sản phẩm mới                       ║" + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "║ 2. Hiển thị danh sách sản phẩm             ║" + ANSI_RESET);
             System.out.println(ANSI_YELLOW + "║ 3. Chỉnh sửa sản phẩm                      ║" + ANSI_RESET);
             System.out.println(ANSI_YELLOW + "║ 4. Xóa sản phẩm                            ║" + ANSI_RESET);
-            System.out.println(ANSI_RED + "║ 5.Tìm sản phẩm theo mã Serial          ║" + ANSI_RESET);
-            System.out.println(ANSI_RED + "║ 6. Quay lại                                ║" + ANSI_RESET);
+            System.out.println(ANSI_RED + "║ 5. Quay lại                                ║" + ANSI_RESET);
             System.out.println(ANSI_BLUE + "╚════════════════════════════════════════════╝" + ANSI_RESET);
             byte choice = InputMethods.getByte();
             switch (choice) {
                 case 1 -> addNewProduct();
                 case 2 -> showProductList();
-//                case 3 -> editProduct();
+                case 3 -> editProduct();
                 case 4 -> deleteProduct();
-//                case 5 -> showProductByCategory();
-                case 6 -> {
+                case 5 -> {
                     return;
                 }
                 default -> System.out.println("Lựa chọn không hợp lệ");
             }
         }
     }
+        //********* thêm mới danh mục ************
 
     private static void addNewProduct() {
         if (categoryBusiness.findAll().isEmpty()) {
-            System.err.println("Chuwa cos danh muc , hay quay laij them danh muc truoc khi them sp");
+            System.err.println("chưa có danh mục, hãy quay lại thêm danh mục trước khi thêm sản phẩm");
             return;
         }
         System.out.println("Nhập số lượng cần thêm mới");
         byte n = InputMethods.getByte();
         for (int i = 0; i < n; i++) {
-            System.out.println("Nhập thông tin cho sanr phaamr thứ :" + (i + 1));
+            System.out.println("Nhập thông tin cho sản phẩm thứ :" + (i + 1));
             Product newProduct = new Product(); // chứa logic tự tăng
             newProduct.inputData(); // cho nhập thông tin
             productBusiness.create(newProduct); // luu lại
         }
         // thông báo thành công
-        System.out.println("Đã thêm mới thành cong " + n + " sản phẩm !");
+        System.out.println("Đã thêm mới thành công " + n + " sản phẩm !");
     }
+    //********* hiển thị danh mục ************
 
     private static void showProductList() {
         // lấy ra danh sách
@@ -189,20 +72,20 @@ public class ProductManagement {
         if (products.isEmpty()) {
             System.err.println("Danh sách trống !");
         } else {
-            System.out.println("-------- Danh sac sản phẩm --------");
+            System.out.println("-------- Danh sách sản phẩm --------");
             for (Product pro : products) {
                 pro.displayData();
             }
         }
     }
-
+//********* sửa danh mục ************
     private static void editProduct() {
         System.out.println("Nhập mã sản phẩm cần chỉnh sửa");
-        int id = InputMethods.getInteger();
-        Product product = productBusiness.findById(id);
+        int editId = InputMethods.getInteger();
+        Product product = productBusiness.findById(editId);
 
         // kiểm tra tồn tại
-        if (productBusiness.findById(id) == null) {
+        if (productBusiness.findById(editId) == null) {
             System.err.println("sản phẩm không tồn tại.");
         }
         while (true) {
@@ -218,7 +101,7 @@ public class ProductManagement {
             switch (choice) {
                 case 1:
                     System.out.println("Nhập tên sản phẩm mới: ");
-                    String productName = InputMethods.getString();
+                    String productName = InputMethods.getString("Enter new name: ");
                     if (!ProductValidation.isValidProductName(productName)) {
                         System.out.println("Tên sản phẩm không được bỏ trống.");
                         return;
@@ -243,17 +126,18 @@ public class ProductManagement {
                     }
                     product.setStock(productQuantity);
                     break;
-//                case 4:
-//                    System.out.println("Danh sách danh mục");
-//                    for (int i = 1 ;i<= categories.size();i++){
-//                        System.out.printf("|STT : %-3s | Name : %-15s |\n",i,categories.get(i-1).getName());
-//                    }
-//                    System.out.println("Lựa chọn danh mục: ");
-//                    product.setCategoryId(String.valueOf());
-//                    break;
+                case 4:
+                    System.out.println("Danh sách danh mục");
+                    for (int i = 1 ;i<= categories.size();i++){
+                        System.out.printf("|STT : %-3s | Name : %-15s |\n",i,categories.get(i-1).getName());
+                    }
+                    System.out.println("Lựa chọn danh mục: ");
+                    int productStock = InputMethods.getInteger();
+                    product.setCategoryId(Integer.parseInt(String.valueOf(categories.get(productStock-1).getId())));
+                    break;
                 case 5:
                     System.out.println("Nhập mô tả sản phẩm mới: ");
-                    String productDescription = InputMethods.getString();
+                    String productDescription = InputMethods.getString("Enter new name: ");
                     if (!ProductValidation.isValidProductDescription(productDescription)) {
                         System.out.println("Mô tả sản phẩm không được bỏ trống.");
                         return;
@@ -281,6 +165,7 @@ public class ProductManagement {
             System.out.println("Chỉnh sửa sản phẩm thành công");
         }
     }
+//********* xóa danh mục ************
 
     private static void deleteProduct() {
         System.out.println("Nhập mã sản phẩm  cần xóa ");
@@ -293,4 +178,6 @@ public class ProductManagement {
             System.out.println(" đã xóa thành công");
         }
     }
+
+
 }
