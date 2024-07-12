@@ -11,7 +11,6 @@ public static final String ANSI_RED = "\u001B[31m";
 
 
     public static void admin(){
-
             while (true) {
                 System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
                 System.out.println(ANSI_CYAN + "║              Admin-Management              ║" + ANSI_RESET);

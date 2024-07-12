@@ -97,7 +97,7 @@ public class Product implements IProductManagement, Serializable {
         price = InputMethods.getDouble();
         System.out.println("Nhập số lượng");
         stock = InputMethods.getInteger();
-        System.out.println(" Nhập mô tả");
+        System.out.println("Nhập mô tả");
         descriptions = InputMethods.getString();
         // chọn danh mục
         System.out.println("Danh sách danh mục");

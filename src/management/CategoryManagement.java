@@ -5,6 +5,7 @@ import business.ICategoryDesign;
 import entity.Category;
 import util.InputMethods;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CategoryManagement {
@@ -17,6 +18,7 @@ public class CategoryManagement {
 
 
         static void menuCategory() {
+
         while (true) {
                 System.out.println(ANSI_BLUE + "╔════════════════════════════════════════════╗" + ANSI_RESET);
                 System.out.println(ANSI_CYAN + "║               Menu Danh Mục                ║" + ANSI_RESET);
@@ -73,7 +75,7 @@ public class CategoryManagement {
             byte n = InputMethods.getByte();
             for (int i = 0; i < n; i++) {
                 System.out.println("Nhập thông tin cho danh mục thứ :" + (i + 1));
-                Category newCategory = new Category(); // chứa logic tự tăng
+                Category newCategory = new Category();
                 newCategory.inputData(); // cho nhập thông tin
                 categoryBusiness.create(newCategory); // luu lại
             }

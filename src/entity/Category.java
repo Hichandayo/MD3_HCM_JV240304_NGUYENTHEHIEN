@@ -50,7 +50,6 @@ public class Category implements IProductManagement, Serializable {
         System.out.println("Nhập tên danh mục :");
         this.name = InputMethods.getString();
     }
-
     @Override
     public void displayData() {
         System.out.printf("|ID : %-4s | Name: %-15s | Status : %10s |\n",id,name,status?"Active":"InActive");

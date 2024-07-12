@@ -101,4 +101,15 @@ public class User implements Serializable {
     public void setBlocked(boolean blocked) {
         isBlocked = blocked;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                " fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                '}';
+    }
 }

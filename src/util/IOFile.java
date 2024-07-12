@@ -1,7 +1,6 @@
 package util;
 
 import entity.RoleName;
-//import entity.User;
 import entity.User;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -23,12 +22,14 @@ public class IOFile {
         }catch (FileNotFoundException e){
             System.err.println("File không tồn tại");
         }catch (EOFException e){
-            System.err.println("Chưa Có Tài Khoản User Nào, Hãy Thêm Vào!!");
-            User admin = new User(1,"admin","admin@gmail.com", BCrypt.hashpw("admin123",BCrypt.gensalt(5)),null,null,null, RoleName.ADMIN,false);
-            List<User> users = new ArrayList<>();
-            users.add(admin);
-            writeToFile(USER_PATH, users);
-            return (List<T>) users;
+            System.err.println("Chưa Có File Nào, Hãy Thêm Vào!!");
+            if(path.equals(USER_PATH)) {
+                User admin = new User(1,"admin","admin@gmail.com", BCrypt.hashpw("admin123",BCrypt.gensalt(5)),null,null,null, RoleName.ADMIN,false);
+                List<User> users = new ArrayList<>();
+                users.add(admin);
+                writeToFile(USER_PATH, users);
+                return (List<T>) users;
+            }
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }  finally {
@@ -68,7 +69,7 @@ public class IOFile {
             }
         }
     }
-    public static User readUserLogin(){
+    public static <T> User readUserLogin(){
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try{
@@ -95,6 +96,8 @@ public class IOFile {
         }
         return null;
     }
+
+
 
     public static void writeUserLogin(User userLogin){
         FileOutputStream fos = null;

@@ -3,6 +3,7 @@ package business;
 import entity.Category;
 import util.IOFile;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CategoryBusiness implements ICategoryDesign{
@@ -14,6 +15,7 @@ public class CategoryBusiness implements ICategoryDesign{
     @Override
     public Boolean create(Category category) {
         categories.add(category);
+        System.out.println(Arrays.toString(categories.toArray()));
         IOFile.writeToFile(IOFile.CATEGORY_PATH,categories);
         return false;
 

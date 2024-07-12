@@ -59,7 +59,7 @@ public class ProductBusiness implements IProductDesign{
         }
         return null;
     }
-
+//kiem tra ton tai
     @Override
     public boolean existByCategoryId(Integer catId) {
         for (Product pro : products){
